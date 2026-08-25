@@ -1,9 +1,6 @@
-#include <cstdio>
+#include "HandleError.cuh"
 
-__global__ void hello()
-{
-    printf("Hello from GPU!\n");
-}
+__global__ void hello() { printf("Hello from GPU!\n"); }
 
 int main()
 {
