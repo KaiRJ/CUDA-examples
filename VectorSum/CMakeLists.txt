@@ -12,6 +12,3 @@ add_executable(main main.cu)
 
 target_include_directories(main PRIVATE
   "${CMAKE_CURRENT_SOURCE_DIR}/../Utilities")
-
-message(STATUS "Source dir: ${CMAKE_CURRENT_SOURCE_DIR}")
-message(STATUS "Utilities: ${CMAKE_CURRENT_SOURCE_DIR}/../Utilities")
