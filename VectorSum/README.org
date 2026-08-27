@@ -1,0 +1,6 @@
+* Vector Sum
+
+Based on the example from Chapter 4.2 in [[https://developer.nvidia.com/cuda-example][CUDA by example]], this example implements a very simple vector sum on the GPU and demonstrates several fundamental ways CUDA exposes its parallelism:
+- Allocating and copying memory on the GPU;
+- Defining and running a parallel CUDA kernal;
+- Retrieving the results from a CUDA program.
