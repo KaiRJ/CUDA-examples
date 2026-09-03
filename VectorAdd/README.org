@@ -1,4 +1,4 @@
-* Vector Sum
+* Vector Addition
 
 Based on the examples from Chapters 4.2 and 5.2 in [[https://developer.nvidia.com/cuda-example][CUDA by example]], this example implements very simple vector addition on the GPU and demonstrates several fundamental ways CUDA exposes its parallelism:
 - Allocating and copying memory on the GPU;
