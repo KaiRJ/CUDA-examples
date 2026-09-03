@@ -1,3 +1,21 @@
 * CUDA Examples
 
 This repository contains several examples that utilise CUDA in C++. Each example is self contained in its own directory with a README.org file that explains what techniques are being used.
+
+** Building
+#+begin_src bash
+  git clone git@github.com:KaiRJ/CUDA-examples.git
+  cd CUDA-examples
+
+  cd JuliaSet # for example
+  mkdir build
+  cd build
+  cmake ..
+  make
+#+end_src
+
+Run the example with:
+
+#+begin_src bash
+./main
+#+end_src

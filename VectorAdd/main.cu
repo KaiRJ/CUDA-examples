@@ -3,13 +3,16 @@
 #include <array>
 #include <iostream>
 
-constexpr int g_N {10};
+constexpr int g_N {33 * 1024};
 
 __global__ void add(int* a, int* b, int* c)
 {
-    int tid = blockIdx.x;
-    if (tid < g_N)
+    unsigned int tid {threadIdx.x + (blockIdx.x * blockDim.x)};
+    while (tid < g_N)
+    {
         c[tid] = a[tid] + b[tid];
+        tid += blockDim.x * gridDim.x;
+    }
 }
 
 int main()
@@ -38,14 +41,25 @@ int main()
     HANDLE_ERROR(cudaMemcpy(dev_a, a.data(), sizeof(a), cudaMemcpyHostToDevice));
     HANDLE_ERROR(cudaMemcpy(dev_b, b.data(), sizeof(b), cudaMemcpyHostToDevice));
 
-    add<<<g_N, 1>>>(dev_a, dev_b, dev_c);
+    add<<<128, 128>>>(dev_a, dev_b, dev_c);
 
     // copy  'c' from the GPU
     HANDLE_ERROR(cudaMemcpy(c.data(), dev_c, sizeof(c), cudaMemcpyDeviceToHost));
 
-    // display the results
+    // verify the program worked
+    bool result {true};
     for (int i {0}; i < g_N; ++i)
-        std::cout << a[i] << " + " << b[i] << " = " << c[i] << "\n";
+    {
+        if (a[i] + b[i] != c[i])
+        {
+            result = false;
+            std::cout << a[i] << " + " << b[i] << " != " << c[i] << "\n";
+        }
+    }
+    if (result)
+    {
+        std::cout << "Success!" << "\n";
+    }
 
     // free the memory allocated on the GPU
     cudaFree(dev_a);

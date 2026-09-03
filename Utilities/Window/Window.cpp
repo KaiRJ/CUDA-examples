@@ -11,11 +11,11 @@ static void framebuffer_size_callback(GLFWwindow* window, int width, int height)
 Window::Window(int width, int height)
 {
     initialise_glfw();
-    CreateWindow(width, height);
+    createWindow(width, height);
     load_opengl_pointers();
 }
 
-void Window::CreateWindow(int width, int height)
+void Window::createWindow(int width, int height)
 {
     m_window = glfwCreateWindow(width, height, "CUDA Examples", nullptr, nullptr);
     if (m_window == nullptr)
@@ -26,22 +26,22 @@ void Window::CreateWindow(int width, int height)
     glfwSetFramebufferSizeCallback(m_window, framebuffer_size_callback);
 }
 
-bool Window::WasKeyPressed(int key) const
+bool Window::wasKeyPressed(int key) const
 {
     return glfwGetKey(m_window, key) == GLFW_PRESS;
 }
 
-void Window::ProcessInput() const
+void Window::processInput() const
 {
-    if (WasKeyPressed(GLFW_KEY_ESCAPE))
+    if (wasKeyPressed(GLFW_KEY_ESCAPE))
     {
         glfwSetWindowShouldClose(m_window, true);
     }
 }
 
-bool Window::ShouldClose() const { return glfwWindowShouldClose(m_window); }
+bool Window::shouldClose() const { return glfwWindowShouldClose(m_window); }
 
-void Window::SwapBuffers() const { glfwSwapBuffers(m_window); }
+void Window::swapBuffers() const { glfwSwapBuffers(m_window); }
 
 // initialize and configure glfw
 static void initialise_glfw()

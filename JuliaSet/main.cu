@@ -40,13 +40,13 @@ int main()
 
     // draw the results
     Window window {g_dim, g_dim};
-    while (!window.ShouldClose())
+    while (!window.shouldClose())
     {
         bitmap.Draw();
 
         // swap buffers and handle input
-        window.ProcessInput();
-        window.SwapBuffers();
+        window.processInput();
+        window.swapBuffers();
         glfwPollEvents();
     }
 
