@@ -3,12 +3,12 @@
 #include <array>
 #include <iostream>
 
-constexpr int g_N {33 * 1024};
+constexpr int g_vector_size {33 * 1024};
 
 __global__ void add(int* a, int* b, int* c)
 {
     unsigned int tid {threadIdx.x + (blockIdx.x * blockDim.x)};
-    while (tid < g_N)
+    while (tid < g_vector_size)
     {
         c[tid] = a[tid] + b[tid];
         tid += blockDim.x * gridDim.x;
@@ -18,9 +18,9 @@ __global__ void add(int* a, int* b, int* c)
 int main()
 {
 
-    std::array<int, g_N> a {};
-    std::array<int, g_N> b {};
-    std::array<int, g_N> c {};
+    std::array<int, g_vector_size> a {};
+    std::array<int, g_vector_size> b {};
+    std::array<int, g_vector_size> c {};
 
     int* dev_a {};
     int* dev_b {};
@@ -31,7 +31,7 @@ int main()
     HANDLE_ERROR(cudaMalloc(&dev_b, sizeof(b)));
     HANDLE_ERROR(cudaMalloc(&dev_c, sizeof(c)));
 
-    for (int i {0}; i < g_N; i++)
+    for (int i {0}; i < g_vector_size; i++)
     {
         a[i] = -i;
         b[i] = i * i;
@@ -48,7 +48,7 @@ int main()
 
     // verify the program worked
     bool result {true};
-    for (int i {0}; i < g_N; ++i)
+    for (int i {0}; i < g_vector_size; ++i)
     {
         if (a[i] + b[i] != c[i])
         {
