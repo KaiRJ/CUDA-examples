@@ -1,9 +1,16 @@
 cmake_minimum_required(VERSION 3.25)
 
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+
+# set correct compilers
+set(CMAKE_C_COMPILER gcc-15)
+set(CMAKE_CXX_COMPILER g++-15)
+set(CMAKE_CUDA_HOST_COMPILER /usr/bin/g++-15)
+
+# set specific standards and architectures
 set(CMAKE_CXX_STANDARD 23)
 set(CMAKE_CUDA_STANDARD 17)
-set(CMAKE_CUDA_ARCHITECTURES native)
+set(CMAKE_CUDA_ARCHITECTURES 86)
 
 project(main LANGUAGES C CXX CUDA)
 
