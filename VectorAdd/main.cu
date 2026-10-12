@@ -3,12 +3,12 @@
 #include <array>
 #include <iostream>
 
-constexpr int g_vector_size {33 * 1024};
+constexpr int g_array_size {33 * 1024};
 
 __global__ void add(int* a, int* b, int* c)
 {
     unsigned int tid {threadIdx.x + (blockIdx.x * blockDim.x)};
-    while (tid < g_vector_size)
+    while (tid < g_array_size)
     {
         c[tid] = a[tid] + b[tid];
         tid += blockDim.x * gridDim.x;
@@ -17,11 +17,12 @@ __global__ void add(int* a, int* b, int* c)
 
 int main()
 {
+    // host arrays
+    std::array<int, g_array_size> a {};
+    std::array<int, g_array_size> b {};
+    std::array<int, g_array_size> c {};
 
-    std::array<int, g_vector_size> a {};
-    std::array<int, g_vector_size> b {};
-    std::array<int, g_vector_size> c {};
-
+    // device pointers
     int* dev_a {};
     int* dev_b {};
     int* dev_c {};
@@ -31,7 +32,8 @@ int main()
     HANDLE_ERROR(cudaMalloc(&dev_b, sizeof(b)));
     HANDLE_ERROR(cudaMalloc(&dev_c, sizeof(c)));
 
-    for (int i {0}; i < g_vector_size; i++)
+    // fill host arrays with values
+    for (int i {0}; i < g_array_size; i++)
     {
         a[i] = -i;
         b[i] = i * i;
@@ -42,13 +44,14 @@ int main()
     HANDLE_ERROR(cudaMemcpy(dev_b, b.data(), sizeof(b), cudaMemcpyHostToDevice));
 
     add<<<128, 128>>>(dev_a, dev_b, dev_c);
+    HANDLE_ERROR(cudaGetLastError());
 
     // copy  'c' from the GPU
     HANDLE_ERROR(cudaMemcpy(c.data(), dev_c, sizeof(c), cudaMemcpyDeviceToHost));
 
     // verify the program worked
     bool result {true};
-    for (int i {0}; i < g_vector_size; ++i)
+    for (int i {0}; i < g_array_size; ++i)
     {
         if (a[i] + b[i] != c[i])
         {

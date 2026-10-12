@@ -7,4 +7,4 @@ CompileFlags:
 
   Add:
     - "--cuda-gpu-arch=sm_86"
-    - "-I/var/home/kjenkins/git/CUDA-examples/Utilities"
+    - "-I../../Utilities"
