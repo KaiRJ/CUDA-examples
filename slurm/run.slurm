@@ -20,3 +20,5 @@ echo "Submitting job using: $executable"
 
 source /veracruz/projects/x/xlzd/CUDA-examples/slurm/setup.sh
 ./"$executable"
+
+echo "Job completed."
