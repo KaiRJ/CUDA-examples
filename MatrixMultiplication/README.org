@@ -1,0 +1,9 @@
+* Matrix Multiplication
+
+This example implements simple square matrix multiplication on the GPU using CUDA. Each GPU thread computes a single element of the output matrix by calculating the dot product of a row from the first matrix and a column from the second matrix. It demonstrates several fundamental CUDA concepts:
+
+- Allocating device memory and transferring data between host and GPU;
+- Configuring CUDA thread blocks and grids to cover a two-dimensional matrix;
+- Using thread and block indices to map GPU threads to matrix elements;
+- Performing parallel computations with a CUDA kernel;
+- Copying the results back to the host and verifying the output.

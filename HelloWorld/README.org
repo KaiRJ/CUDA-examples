@@ -1,0 +1,9 @@
+* Hello World
+
+This example implements a simple =Hello World= program using CUDA to demonstrate how GPU kernels execute across multiple threads:
+
+- Defining a CUDA kernel using the ~__global__~ qualifier;
+- Launching a kernel with multiple thread blocks and threads per block;
+- Accessing built-in CUDA variables such as ~blockIdx.x~ and ~threadIdx.x~;
+- Printing output from individual GPU threads;
+- Synchronising the host with the GPU using ~cudaDeviceSynchronize()~.
