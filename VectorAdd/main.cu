@@ -3,9 +3,12 @@
 #include <array>
 #include <iostream>
 
-constexpr int g_array_size {33 * 1024};
+namespace
+{
+    constexpr int g_array_size {33 * 1024};
+}
 
-__global__ void add(int* a, int* b, int* c)
+__global__ void add(const int* a, const int* b, int* c)
 {
     unsigned int tid {threadIdx.x + (blockIdx.x * blockDim.x)};
     while (tid < g_array_size)

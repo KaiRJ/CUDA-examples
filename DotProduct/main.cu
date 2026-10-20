@@ -12,7 +12,7 @@ namespace
         std::min(32, (g_array_size + g_threads_per_block - 1) / g_threads_per_block)};
 } // namespace
 
-__global__ void dot(float* a, float* b, float* c);
+__global__ void dot(const float* a, const float* b, float* c);
 
 int main()
 {
@@ -66,7 +66,7 @@ int main()
     return 0;
 }
 
-__global__ void dot(float* a, float* b, float* c)
+__global__ void dot(const float* a, const float* b, float* c)
 {
     __shared__ float cache[g_threads_per_block];
     const unsigned int cache_index {threadIdx.x};
