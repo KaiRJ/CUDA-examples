@@ -1,0 +1,13 @@
+* 1D Stencil
+
+This example implements a one-dimensional stencil computation on the GPU using CUDA. Each GPU thread calculates an output element by summing its corresponding input element and a fixed number of neighbouring elements on either side. Shared memory is used to cache input values within each thread block, reducing global memory accesses and allowing neighbouring threads to reuse data.
+
+It demonstrates several fundamental CUDA concepts:
+- Allocating device memory and transferring data between the host and GPU;
+- Configuring CUDA thread blocks and grids to process a one-dimensional array;
+- Using thread and block indices to map threads to input elements;
+- Using shared memory to cache input elements and improve memory access efficiency;
+- Loading halo elements to provide neighbouring values at block boundaries;
+- Synchronising threads using ~__syncthreads()~ before performing computations;
+- Applying a stencil operation over a fixed neighbourhood;
+- Verifying the GPU results against the expected output.
