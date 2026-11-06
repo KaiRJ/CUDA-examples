@@ -1,0 +1,13 @@
+* Dot Product
+
+This example implements the dot product of two vectors on the GPU using CUDA. Each GPU thread calculates the product of corresponding elements from the two input vectors and accumulates a partial sum. Threads within each block then cooperate using shared memory to perform a parallel reduction, producing a partial sum for each block. These partial sums are transferred back to the CPU and combined to obtain the final result.
+
+It demonstrates several fundamental CUDA concepts:
+- Allocating device memory and transferring data between the host and GPU;
+- Configuring CUDA thread blocks and grids to process large vectors;
+- Using thread and block indices to distribute work across GPU threads;
+- Accumulating partial dot products within individual threads;
+- Using shared memory to store intermediate results;
+- Performing parallel reduction to combine thread results within a block;
+- Synchronising threads using ~__syncthreads()~;
+- Combining block-level partial sums on the CPU to obtain the final dot product.

@@ -2,7 +2,6 @@
 
 #include <algorithm>
 #include <array>
-#include <cuda_runtime_api.h>
 
 namespace
 {
